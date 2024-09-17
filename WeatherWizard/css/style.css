@@ -1,0 +1,145 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    transition: background-color 0.5s ease-in-out;
+    position: relative;
+}
+
+/* Header Styling */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    right: 50px; /* Move left to avoid cutting off */
+    top: 20px;
+}
+
+/* Search Container */
+.search-container {
+    position: absolute;
+    top: 20px; /* Move the search bar to the top */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 12px;
+    width: 320px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Weather Display */
+.weather-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    height: auto;
+}
+
+#weatherDisplay h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+#weatherDisplay p {
+    font-size: 18px;
+}
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
+}
+
+/* Footer Styling */
+footer {
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Dynamic Background Colors */
+.sunny {
+    background-color: #FFE082;
+}
+
+.cloudy {
+    background-color: #90A4AE;
+}
+
+.rainy {
+    background-color: #78909C;
+}
+
+.stormy {
+    background-color: #455A64;
+}
+
+.snowy {
+    background-color: #ECEFF1;
+}
+
+.clear-night {
+    background-color: #2E3B4E;
+}
+
+.mist {
+    background-color: #CFD8DC;
+}

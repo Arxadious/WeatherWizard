@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherWizard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>WeatherWizard</h1>
+        <nav>
+            <a href="php/login.php">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <input type="text" id="locationInput" placeholder="Search: City or Zip Code">
+            <button onclick="getWeather()">Get Weather</button>
+        </div>
+        <div id="weatherDisplay" class="weather-info">
+            <!-- Dynamic weather data will go here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>Powered by OpenWeatherMap</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
