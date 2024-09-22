@@ -1,3 +1,4 @@
+// Weather fetching function
 function getWeather() {
     const location = document.getElementById('locationInput').value;
     if (location === '') {
@@ -5,7 +6,7 @@ function getWeather() {
         return;
     }
 
-    const apiKey = '68492af478c6a18b71129da4b72cf475';  // Your OpenWeatherMap API key
+    const apiKey = '68492af478c6a18b71129da4b72cf475';  
     const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
 
     fetch(apiUrl)
@@ -22,8 +23,8 @@ function getWeather() {
 }
 
 function displayWeather(data) {
-    const weatherIconCode = data.weather[0].icon;  // Get the weather icon code from the API response
-    const localIconUrl = `images/${weatherIconCode}.png`;  // Use the icon code to fetch the correct image
+    const weatherIconCode = data.weather[0].icon;  
+    const localIconUrl = `images/${weatherIconCode}.png`;  
 
     const weatherDisplay = document.getElementById('weatherDisplay');
     weatherDisplay.innerHTML = `
@@ -62,6 +63,57 @@ function changeBackgroundColor(weatherMain) {
             body.classList.add('mist');
             break;
         default:
-            body.classList.add('clear-night');  // Default background for unknown weather conditions
+            body.classList.add('clear-night');  
     }
 }
+
+// Authentication modal handling
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const authModal = document.getElementById('authModal');
+const closeModal = document.getElementById('closeModal');  
+const authForm = document.getElementById('authForm');
+const formTitle = document.getElementById('formTitle');
+const submitBtn = document.getElementById('submitBtn');
+const switchBtn = document.getElementById('switchBtn');
+const switchText = document.getElementById('switchText');
+
+// Show the login modal when the Login button is clicked
+loginBtn.addEventListener('click', () => {
+    authModal.style.display = 'flex'; 
+});
+
+// Close the modal when the close (X) button is clicked
+closeModal.addEventListener('click', () => {
+    authModal.style.display = 'none'; 
+});
+
+// Close modal on form submit (add proper validation later)
+authForm.addEventListener('submit', (e) => {
+    e.preventDefault();  
+
+    // Simulate successful login or registration
+    authModal.style.display = 'none'; 
+    loginBtn.style.display = 'none';  
+    logoutBtn.style.display = 'block'; 
+});
+
+// Toggle between Login and Register
+switchBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (formTitle.textContent === 'Login') {
+        formTitle.textContent = 'Register';
+        submitBtn.textContent = 'Register';
+        switchText.innerHTML = 'Already have an account? <a href="#" id="switchBtn">Login</a>';
+    } else {
+        formTitle.textContent = 'Login';
+        submitBtn.textContent = 'Login';
+        switchText.innerHTML = 'Don\'t have an account? <a href="#" id="switchBtn">Register</a>';
+    }
+});
+
+// Show login again on logout
+logoutBtn.addEventListener('click', () => {
+    logoutBtn.style.display = 'none';  
+    loginBtn.style.display = 'block';  
+});

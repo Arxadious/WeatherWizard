@@ -7,22 +7,43 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header>
-        <h1>WeatherWizard</h1>
+        <h1 class="logo">WeatherWizard</h1>
         <nav>
-            <a href="php/login.php">Login</a>
+            <!-- Login button initially -->
+            <button id="loginBtn" class="auth-btn">Login</button>
+            <button id="logoutBtn" class="auth-btn" style="display:none;">Logout</button>
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main>
         <div class="search-container">
             <input type="text" id="locationInput" placeholder="Search: City or Zip Code">
             <button onclick="getWeather()">Get Weather</button>
         </div>
-        <div id="weatherDisplay" class="weather-info">
-            <!-- Dynamic weather data will go here -->
-        </div>
+        <div id="weatherDisplay" class="weather-info"></div>
     </main>
+
+    <!-- Login/Register Modal -->
+    <div id="authModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <!-- X Button to close the modal -->
+            <span class="close-btn" id="closeModal">&times;</span>
+
+            <!-- Login/Register Form -->
+            <form id="authForm" action="php/login.php" method="POST">
+                <h2 id="formTitle">Login</h2>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" id="submitBtn">Login</button>
+            </form>
+            <p id="switchText">Don't have an account? <a href="#" id="switchBtn">Register</a></p>
+        </div>
+    </div>
 
     <footer>
         <p>Powered by OpenWeatherMap</p>
