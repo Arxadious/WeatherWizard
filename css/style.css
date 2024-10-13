@@ -1,0 +1,303 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    height: 100vh;
+    background-color: #f4f4f4;
+    transition: background-color 0.5s ease-in-out;
+    overflow: hidden; /* Prevent body scrolling if modal is open */
+}
+
+/* Header Styling */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: 20px;  
+}
+
+/* Search Bar Styling in Header */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin: 0 auto; /* Center the search bar in the header */
+    flex-grow: 1; /* Allows the search bar to expand and center itself */
+    justify-content: center; /* Center items within the search bar container */
+}
+
+.search-bar input[type="text"] {
+    padding: 12px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.search-bar button {
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+.auth-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px; 
+    transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Centered Login/Register Modal */
+.modal {
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+}
+
+/* Close Button (X) Styling */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Input and Button Styling for Modal */
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+#switchText {
+    margin-top: 10px;
+}
+
+/* Weather Display */
+.weather-info {
+    position: fixed;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    height: auto;
+}
+
+#weatherDisplay h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+#weatherDisplay p {
+    font-size: 18px;
+}
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
+}
+
+/* Favorites Section */
+#favoritesListContainer {
+    position: fixed;
+    top: 160px; /* Adjust this to control how far below the logo */
+    left: 20px; 
+    text-align: left;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    max-height: 350px; 
+    overflow-y: auto; /* Allow scrolling if favorites exceed container height */
+}
+
+#favoritesListContainer h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+#favoritesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#favoritesList li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+#favoritesList li:hover {
+    background-color: #e9e9e9;
+}
+
+.favorite-city-name {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.remove-favorite {
+    color: white;
+    background-color: #dc3545; /* Bootstrap-like danger red */
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-favorite:hover {
+    background-color: #c82333; /* Darker red for hover */
+}
+
+/* Star Icon for Favorites */
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    color: #ccc;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.star.active {
+    color: gold; /* Gold color for active favorite */
+}
+
+/* Footer Styling */
+footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #555;
+}
+
+/* Dynamic Background Colors */
+.sunny {
+    background-color: #FFE082;
+}
+
+.cloudy {
+    background-color: #90A4AE;
+}
+
+.rainy {
+    background-color: #78909C;
+}
+
+.stormy {
+    background-color: #455A64;
+}
+
+.snowy {
+    background-color: #ECEFF1;
+}
+
+.clear-night {
+    background-color: #2E3B4E;
+}
+
+.mist {
+    background-color: #CFD8DC;
+}
