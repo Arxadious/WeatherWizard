@@ -1,8 +1,23 @@
 <?php
-$host = 'localhost';
-$db = 'weatherwizard';
-$user = 'root';
-$pass = 'JDM23';
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Check for preflight requests (OPTIONS request)
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Update with your actual database credentials
+$host = 'sql103.infinityfree.com';  
+$db = 'if0_37324028_weatherwizard'; 
+$user = 'if0_37324028';             
+$pass = 'q2h79ZWzexr';       
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -15,6 +30,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    echo 'Connection failed: ' . $e->getMessage();
+    exit();
 }
 ?>
