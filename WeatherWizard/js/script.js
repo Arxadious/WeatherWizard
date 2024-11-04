@@ -7,7 +7,7 @@ function getCookie(name) {
 }
 
 // Helper function to set a cookie
-function setCookie(name, value, days) {  
+function setCookie(name, value, days) {
     let expires = "";
     if (days) {
         const date = new Date();
@@ -19,7 +19,7 @@ function setCookie(name, value, days) {
 
 // Helper function to delete a cookie
 function deleteCookie(name) {
-    document.cookie = `${name}=; path=/; max-age=0`;
+    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax`;
 }
 
 // Variable to store user favorites
@@ -27,9 +27,9 @@ let favorites = [];
 
 // Weather fetching function
 function getWeather() {
-    const locationInput = document.getElementById('locationInput').value;
-    if (locationInput === '') {
-        alert('Please enter a location');
+    const locationInput = document.getElementById('locationInput').value.trim();
+    if (!locationInput || /[^a-zA-Z0-9\s,]/.test(locationInput)) {
+        alert('Please enter a valid location');
         return;
     }
     fetchWeatherData(locationInput);
@@ -38,7 +38,7 @@ function getWeather() {
 // Helper function to fetch weather data and display it
 function fetchWeatherData(location) {
     const apiKey = '68492af478c6a18b71129da4b72cf475';
-    const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&units=metric&appid=${apiKey}`;
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -152,14 +152,19 @@ function updateFavoriteDisplay() {
         li.classList.add('favorite-item');
         li.innerHTML = `
             <span class="favorite-city-name">${city}</span>
-            <button class="remove-favorite">-</button>
+            <button class="remove-favorite" data-location="${city}">-</button>
         `;
+
+        // Add event listener to fetch weather data for the selected city
         li.querySelector('.favorite-city-name').addEventListener('click', () => {
             fetchWeatherData(city);
         });
+
+        // Add event listener to remove the favorite city
         li.querySelector('.remove-favorite').addEventListener('click', () => {
             toggleFavorite(city);
         });
+
         favoriteList.appendChild(li);
     });
 }
@@ -200,6 +205,16 @@ function changeBackgroundColor(weatherCondition) {
 function isDayTime() {
     const hours = new Date().getHours();
     return hours >= 6 && hours <= 18;
+}
+
+// Logout function to handle session termination
+function logout() {
+    deleteCookie('user_id'); // Delete user cookie
+    // Hide logout button and show login button
+    document.getElementById('loginBtn').style.display = 'block';
+    document.getElementById('logoutBtn').style.display = 'none';
+    // Clear favorites list after logout
+    document.getElementById('favoritesList').innerHTML = '';
 }
 
 // Event listeners and DOMContentLoaded
@@ -253,6 +268,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData(authForm);
         const actionUrl = authForm.action;
 
+        // Password validation - must be at least 5 characters, contain at least one letter, one number, and one special character
+        const password = formData.get('password');
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
+
+        if (!passwordRegex.test(password)) {
+            alert('Password must be at least 5 characters long and contain at least one letter, one number, and one special character.');
+            return;
+        }
+
         fetch(actionUrl, {
             method: 'POST',
             body: formData
@@ -275,26 +299,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Logout functionality
+    // Attach the logout function to the logout button
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            fetch('php/logout.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        deleteCookie('user_id');
-                        logoutBtn.style.display = 'none';
-                        loginBtn.style.display = 'block';
-                        favorites = [];
-                        updateFavoriteDisplay();
-                    } else {
-                        console.error('Logout failed:', data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error logging out:', error);
-                    alert('An error occurred during logout.');
-                });
+            logout();
         });
     }
 

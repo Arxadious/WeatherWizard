@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherWizard</title>
     <link rel="stylesheet" href="css/style.css">
-</head>
+</head> 
 <body>
     <header>
         <h1 class="logo">WeatherWizard</h1>
         <div class="search-bar">
-            <input type="text" id="locationInput" placeholder="Search: City or Zip Code">
-            <button onclick="getWeather()">Search</button>
+            <input type="text" id="locationInput" placeholder="Search: City or Zip Code" aria-label="Search location">
+            <button onclick="getWeather()" aria-label="Search Button">Search</button>
         </div>
         <nav>
-            <button id="loginBtn" class="auth-btn">Login</button>
-            <button id="logoutBtn" class="auth-btn" style="display:none;">Logout</button>
+            <button id="loginBtn" class="auth-btn" aria-label="Login Button">Login</button>
+            <button id="logoutBtn" class="auth-btn" style="display:none;" aria-label="Logout Button" onclick="logout()">Logout</button>
         </nav>
     </header>
 
@@ -37,9 +37,9 @@
             <form id="authForm" action="php/register.php" method="POST">
                 <h2 id="formTitle">Login</h2>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required aria-label="Email">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required aria-label="Password">
                 <button type="submit" id="submitBtn">Login</button>
             </form>
             <p id="switchText">Don't have an account? <a href="#" id="switchBtn">Register</a></p>
